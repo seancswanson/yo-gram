@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-post-create',
-  templateUrl: './post-create.component.html',
+  selector: "app-post-create",
+  templateUrl: "./post-create.component.html",
+  styleUrls: ["./post-create.component.scss"],
 })
 export class PostCreateComponent {
-  newPost: string = '';
-  onAddPost(postInput: HTMLTextAreaElement) {
-    this.newPost = postInput.value;
+  enteredValue: string = "";
+  newPost: string = "";
+
+  onAddPost() {
+    this.newPost = this.enteredValue;
   }
 }
