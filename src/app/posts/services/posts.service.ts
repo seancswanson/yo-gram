@@ -17,7 +17,7 @@ export class PostsService {
   }
 
   getPostUpdateListener() {
-    // Tells the system that we will need to be watching for changes
+    // Tells the system that we will need to be observing for changes
     return this.postsUpdated.asObservable();
   }
 

@@ -19,5 +19,6 @@ export class PostCreateComponent {
 
     // Send the title and content to the service to create a post.
     this.postsService.addPost(form.value.title, form.value.content);
+    form.resetForm();
   }
 }
