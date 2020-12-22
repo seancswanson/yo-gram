@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Post } from "../interfaces/post.model";
 
 @Component({
   selector: "app-post-create",
@@ -6,14 +8,16 @@ import { Component, EventEmitter, Output } from "@angular/core";
   styleUrls: ["./post-create.component.scss"],
 })
 export class PostCreateComponent {
-  enteredTitle: string = "";
-  enteredContent: string = "";
-  @Output() postCreated = new EventEmitter();
+  @Output() postCreated = new EventEmitter<Post>();
 
-  onAddPost() {
-    const post = {
-      title: this.enteredTitle,
-      content: this.enteredContent,
+  onAddPost(form: NgForm) {
+    // Is the form valid? If not, return and cancel operation.
+    if (!form.valid) {
+      return;
+    }
+    const post: Post = {
+      title: form.value.title,
+      content: form.value.content,
     };
 
     this.postCreated.emit(post);
