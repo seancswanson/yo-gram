@@ -6,6 +6,10 @@ const app = express();
 
 // Use some middleware
 // Takes a request, gives a response
+
+// We need to set some some headers to get around CORS Errors.
+// We set the headers that carry information about the client browser,
+// the requested page, the server, and more.
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Header', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -13,6 +17,8 @@ app.use((req, res, next) => {
   next();
 });
 
+// When the front end GETS @ this URL, we are returning a payload of the
+// posts and also a message indicating a successful or failed API call
 app.use('/api/posts', (req, res, next) => {
   const posts = [
     {
