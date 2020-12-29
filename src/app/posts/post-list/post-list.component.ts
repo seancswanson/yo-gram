@@ -16,7 +16,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Initialize posts on create.
-    this.posts = this.postsService.getPosts();
+    this.postsService.getPosts();
     // Begin subscription to the posts observable.
     // When the subscription sees a new Post
     // object, it will update our master list of posts.
