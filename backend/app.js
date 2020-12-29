@@ -1,9 +1,14 @@
 // Import express.
 const express = require('express');
+// Import body parser middleware.
+const bodyParser = require('body-parser');
 
 // Instantiate express into app.
 const app = express();
 
+app.use(bodyParser.json());
+// sean
+// UmRMY6EEJj39Dk6
 // Use some middleware
 // Takes a request, gives a response
 
@@ -12,14 +17,23 @@ const app = express();
 // the requested page, the server, and more.
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Header', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.setHeader('Access-Control-Allow-Header', 'GET, POST, PATCH, DELETE, OPTIONS');
   next();
 });
 
+app.post('/api/posts', (req, res, next) => {
+  const post = req.body;
+  console.log('Posted', post);
+  res.status(201).json({
+    message: 'Post added successfully'
+  });
+});
+
+
 // When the front end GETS @ this URL, we are returning a payload of the
 // posts and also a message indicating a successful or failed API call
-app.use('/api/posts', (req, res, next) => {
+app.get('/api/posts', (req, res, next) => {
   const posts = [
     {
       id: 'fsdfq23',
