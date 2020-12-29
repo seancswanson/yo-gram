@@ -3,12 +3,13 @@ const express = require('express');
 // Import body parser middleware.
 const bodyParser = require('body-parser');
 
+const Post = require('./models/post');
+
 // Instantiate express into app.
 const app = express();
 
 app.use(bodyParser.json());
-// sean
-// UmRMY6EEJj39Dk6
+
 // Use some middleware
 // Takes a request, gives a response
 
@@ -23,7 +24,10 @@ app.use((req, res, next) => {
 });
 
 app.post('/api/posts', (req, res, next) => {
-  const post = req.body;
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
+  });
   console.log('Posted', post);
   res.status(201).json({
     message: 'Post added successfully'
