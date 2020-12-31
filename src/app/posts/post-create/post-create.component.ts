@@ -9,19 +9,16 @@ import { PostsService } from "../services/posts.service";
   styleUrls: ["./post-create.component.scss"],
 })
 export class PostCreateComponent {
-  index = 1;
   constructor(public postsService: PostsService) {}
 
   onAddPost(form: NgForm) {
-    let index = 1;
     // Is the form valid? If not, return and cancel operation.
     if (!form.valid) {
       return;
     }
 
     // Send the title and content to the service to create a post.
-    this.postsService.addPost(this.index, form.value.title, form.value.content);
-    this.index++;
+    this.postsService.addPost(form.value.title, form.value.content);
     form.resetForm();
   }
 }
