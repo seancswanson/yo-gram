@@ -59,6 +59,7 @@ export class PostsService {
       .subscribe((responseData) => {
         console.log(responseData);
         const postId = responseData.postId;
+        post.id = postId;
         // Push the Post obj to this service's posts property,
         // which the service instance manages for the app.
         this.posts.push(post);
