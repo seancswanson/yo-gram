@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Post } from "../interfaces/post.model";
+import { Router } from "@angular/router";
 
 // This is saying that this class will be injectable into any class
 // component underneath the root through their constructor.
@@ -17,7 +18,7 @@ export class PostsService {
   // the data to PostListComponent.posts.
   private postsUpdated = new Subject<Post[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // Reaches out to BE to get some JSON.
   getPosts() {
@@ -74,6 +75,7 @@ export class PostsService {
         // multicasted to Observers in the app that are
         // registered to listen to this subject.
         this.postsUpdated.next([...this.posts]);
+        this.router.navigate(["/"]);
       });
   }
 
@@ -87,6 +89,7 @@ export class PostsService {
         updatedPosts[oldPostIndex] = post;
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
+        this.router.navigate(["/"]);
       });
   }
 

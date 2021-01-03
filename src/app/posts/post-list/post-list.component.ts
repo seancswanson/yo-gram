@@ -10,11 +10,13 @@ import { PostsService } from "../services/posts.service";
 })
 export class PostListComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
+  isLoading = false;
   // Creates a property that will be a Subscription.
   private postsSub: Subscription;
   constructor(public postsService: PostsService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     // Initialize posts on create.
     this.postsService.getPosts();
     // Begin subscription to the posts observable.
@@ -23,6 +25,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     this.postsSub = this.postsService
       .getPostUpdateListener()
       .subscribe((posts: Post[]) => {
+        this.isLoading = false;
         this.posts = posts;
       });
   }
